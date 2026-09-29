@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>Гостинний Двір</title>
+  <title>Гостинний Двір — Головна</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.png/favicons/favicon-16x16.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -42,6 +42,10 @@
 
     .hero-menu-btn {
       margin: 35px 0 25px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
     }
 
     /* Carousel styling in site theme */
@@ -103,7 +107,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="index.html">
-      <img src="Logo 2.png" width="80">
+      <img src="Logo 2.png" width="80" alt="Логотип">
     </a>
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon"></span>
@@ -113,7 +117,15 @@
         <li class="nav-item">
           <a class="nav-link active" href="index.html">Головна</a>
         </li>
-        <!-- Кнопку Меню з верхньої панелі прибрано -->
+        <li class="nav-item">
+          <a class="nav-link" href="menu.html">Меню</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="hotel.html">Готель</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="banya.html">Баня</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="contacts.html">Контакти</a>
         </li>
@@ -121,26 +133,26 @@
     </div>
   </div>
 </nav>
-  </div>
-</section>
+
 <section class="hero">
   <div class="hero-content text-center">
     <h1>Гостинний Двір</h1>
     <p>
       Затишна атмосфера, гостинність і душевні домашні страви. Ідеально для сімейного відпочинку, теплих зустрічей та святкування особливих подій.
     </p>
-    <!-- <p>
-      Ідеально для сімейного відпочинку, теплих зустрічей  
-      та приємних вечорів у колі друзів, та для святкування особливих подій.
-    </p> -->
 
-    <!-- Кнопка переходу на Меню по центру -->
+    <!-- Робочі кнопки переходу -->
     <div class="hero-menu-btn">
-      <a href="menu.html" class="btn btn-outline-light btn-lg px-5 py-3" style="border-width:2px; letter-spacing:1px;">
+      <a href="menu.html" class="btn btn-outline-light btn-lg px-4 py-3" style="border-width:2px; letter-spacing:1px;">
         Меню
       </a>
+      <a href="hotel.html" class="btn btn-outline-light btn-lg px-4 py-3" style="border-width:2px; letter-spacing:1px;">
+        Готель
+      </a>
+      <a href="banya.html" class="btn btn-outline-light btn-lg px-4 py-3" style="border-width:2px; letter-spacing:1px;">
+        Баня
+      </a>
     </div>
-    
   </div>
 </section>
 
@@ -156,12 +168,11 @@
       Ми створили простір, у якому хочеться залишитись довше —
       без метушні, з хорошою їжею та приємною атмосферою.
     </p>
-    <p class="text-center mb-12">
-       Також наш ресторан надає такі послуги, як: Поселення в готельні номера, які знаходяться на 2 поверсі нашого ресторану. А також
-       наш ресторан надає послуги по відвідуванні бані, яка знаходиться на території ресторану.
+    <p class="text-center mb-4">
+       Також наш комплекс надає такі послуги, як: поселення в затишні готельні номери на 2 поверсі нашого ресторану, а також відпочинок у справжній бані на території комплексу.
     </p>
     <p class="text-center mb-4">
-      Для бронювання готельного номера або бані, будь ласка, зв'яжіться з нами за телефоном, чи звернувшись на пряму на барі або через наш Instagram.
+      Для бронювання готельного номера або бані, будь ласка, зв'яжіться з нами за телефоном, звернувшись напряму на барі або через наш Instagram.
     </p>
     <p class="text-center mb-4">
       Ми з нетерпінням чекаємо на вас у Гостинному Дворі, де кожен гість — це частина нашої великої родини.
