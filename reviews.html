@@ -365,7 +365,7 @@
 
   <main class="gd-wrap">
 
-    <!-- Панель входу / Модерації (прихована за замовчуванням) -->
+    <!-- Адмін-панель (модерація та вхід) -->
     <div id="admin-container" class="admin-panel" style="display: none;">
       <h2>Панель адміністратора</h2>
       <div id="admin-login-box" class="mb-3">
@@ -499,7 +499,7 @@
     var PAGE_SIZE = 6;
 
     var state = { reviews: [], pendingReviews: [], shown: PAGE_SIZE, rating: 0, experience: "", isAdmin: false };
-    const ADMIN_PASSWORD = "admin"; // Змініть пароль за потреби
+    var ADMIN_PASSWORD = "admin"; // Пароль адміністратора за замовчуванням
 
     function headers(extra) {
       var base = { apikey: API_KEY, Authorization: "Bearer " + API_KEY, "Content-Type": "application/json" };
@@ -555,12 +555,10 @@
       return count + " відгуків";
     }
 
-    /* ---- Завантаження опублікованих та неопублікованих відгуків ---- */
+    /* ---- Завантаження відгуків ---- */
     function loadReviews() {
       var pubUrl = API_URL + "/restaurant_reviews_published?select=id,author_name,rating,title,body,visit_type,owner_note,created_at&order=created_at.desc&limit=200";
-      
       var p1 = fetch(pubUrl, { headers: headers() }).then(res => res.json());
-      
       var p2 = state.isAdmin 
         ? fetch(API_URL + "/restaurant_reviews?status=eq.pending&select=id,author_name,rating,title,body,visit_type,created_at", { headers: headers() }).then(res => res.json())
         : Promise.resolve([]);
@@ -713,7 +711,7 @@
       return card;
     }
 
-    /* ---- Керування адмін-панеллю та діями ---- */
+    /* ---- Керування адмін-панеллю ---- */
     function toggleAdminLogin() {
       var container = document.getElementById("admin-container");
       container.style.display = container.style.display === "none" ? "block" : "none";
