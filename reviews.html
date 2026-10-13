@@ -19,6 +19,8 @@
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
+      background-color: #121212;
+      color: #fff;
     }
 
     .hero-content h1 {
@@ -70,7 +72,7 @@
       margin-bottom: 10px;
     }
 
-    /* Стилі для форми */
+    /* Стилі для форми та елементів завантаження файлу */
     .form-label {
       font-weight: 500;
       color: #e0e0e0;
@@ -82,6 +84,28 @@
       color: #fff;
       border-radius: 10px;
       padding: 12px;
+    }
+
+    /* Фірмове оформлення інпуту для завантаження фото */
+    .form-control[type="file"] {
+      padding: 10px 14px;
+      cursor: pointer;
+      color: #b0b0b0;
+    }
+
+    .form-control[type="file"]::file-selector-button {
+      background-color: #8D5B4C;
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      margin-right: 15px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .form-control[type="file"]::file-selector-button:hover {
+      background-color: #794A3D;
     }
 
     .form-control:focus, .form-select:focus {
@@ -98,6 +122,27 @@
 
     .form-control::placeholder {
       color: #b0b0b0;
+    }
+
+    /* Стиль для відображення фото у картці відгуку */
+    .review-photo-container {
+      margin-top: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      max-height: 220px;
+    }
+
+    .review-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .review-photo:hover {
+      transform: scale(1.03);
     }
 
     /* Фірмова кнопка */
@@ -135,7 +180,7 @@
 <body>
 
 <!-- Навігація -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark border-bottom border-secondary">
   <div class="container">
     <a class="navbar-brand" href="index.html">
       <img src="Logo 2.png" width="80" alt="Логотип">
@@ -169,8 +214,8 @@
 </nav>
 
 <!-- Hero секція -->
-<section class="hero">
-  <div class="hero-content text-center">
+<section class="hero py-5 mt-5">
+  <div class="hero-content text-center py-5">
     <h1>Відгуки Гостей</h1>
     <p>
       Діліться своїми враженнями про відпочинок у «Гостинному дворі» та читайте відгуки наших відвідувачів!
@@ -179,7 +224,7 @@
 </section>
 
 <!-- Основний контент -->
-<section class="section section-dark">
+<section class="section section-dark py-4">
   <div class="container py-4">
 
     <!-- Секція форми -->
@@ -205,9 +250,15 @@
                 </select>
               </div>
 
-              <div class="mb-4">
+              <div class="mb-3">
                 <label for="reviewText" class="form-label">Ваш відгук:</label>
                 <textarea class="form-control" id="reviewText" rows="4" placeholder="Розкажіть про свої враження..." required></textarea>
+              </div>
+
+              <!-- Поле для прикріплення фотографії у фірмовому стилі -->
+              <div class="mb-4">
+                <label for="reviewPhoto" class="form-label">Фото до відгуку (необов'язково):</label>
+                <input type="file" class="form-control" id="reviewPhoto" accept="image/*">
               </div>
 
               <div class="text-center">
@@ -251,10 +302,10 @@
 </section>
 
 <footer class="text-center py-4 text-white-50" style="background: rgba(0,0,0,0.8);">
-  <p class="mb-0">&copy;Гостинний двір. Всі права захищені.</p>
+  <p class="mb-0">&copy; 2026 Гостинний двір. Всі права захищені.</p>
 </footer>
 
-<!-- Скрипт додавання відгуків -->
+<!-- Скрипт додавання відгуків із підтримкою фото -->
 <script>
   const reviewForm = document.getElementById('reviewForm');
   const reviewsContainer = document.getElementById('reviewsContainer');
@@ -266,30 +317,49 @@
     const ratingValue = Number(document.getElementById('reviewRating').value);
     const ratingStars = '⭐'.repeat(ratingValue);
     const text = document.getElementById('reviewText').value;
+    const photoInput = document.getElementById('reviewPhoto');
     const date = new Date().toLocaleDateString('uk-UA', { year: 'numeric', month: 'long', day: 'numeric' });
 
-    const newCol = document.createElement('div');
-    newCol.className = 'col-md-6 col-lg-4';
-    newCol.innerHTML = `
-      <div class="card-custom">
-        <div class="card-body d-flex flex-column justify-content-between">
-          <div>
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <h3>${name}</h3>
-              <span class="rating-stars">${ratingStars}</span>
+    function insertReviewCard(photoUrl) {
+      const newCol = document.createElement('div');
+      newCol.className = 'col-md-6 col-lg-4';
+      newCol.innerHTML = `
+        <div class="card-custom">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3>${name}</h3>
+                <span class="rating-stars">${ratingStars}</span>
+              </div>
+              <p>${text}</p>
+              ${photoUrl ? `
+                <div class="review-photo-container">
+                  <img src="\${photoUrl}" alt="Фото від гостя" class="review-photo">
+                </div>
+              ` : ''}
             </div>
-            <p>${text}</p>
-          </div>
-          <div class="mt-3">
-            <small class="review-date">${date}</small>
+            <div class="mt-3">
+              <small class="review-date">${date}</small>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
 
-    reviewsContainer.prepend(newCol);
-    reviewForm.reset();
-    alert('Дякуємо! Ваш відгук успішно додано.');
+      reviewsContainer.prepend(newCol);
+      reviewForm.reset();
+      alert('Дякуємо! Ваш відгук успішно додано.');
+    }
+
+    // Обробка завантаженого файлу через FileReader
+    if (photoInput.files && photoInput.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        insertReviewCard(event.target.result);
+      };
+      reader.readAsDataURL(photoInput.files[0]);
+    } else {
+      insertReviewCard(null);
+    }
   });
 </script>
 
