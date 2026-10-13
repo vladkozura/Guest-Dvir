@@ -8,9 +8,15 @@
   <meta name="description"
     content="Відгуки гостей комплексу «Гостинний Двір»: ресторан традиційної кухні, готельні номери та баня на дровах у Городищі.">
   <link rel="icon" type="image/x-icon" href="favicon.png/favicons/favicon-16x16.png">
+  
+  <!-- Bootstrap 5 CSS & JS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Основні стилі -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@400;500&display=swap"
     rel="stylesheet">
 
@@ -21,175 +27,50 @@
       color: #fff;
     }
 
-    /* Навігація в стилі шапки з макета */
-    .navbar-custom {
-      background: rgba(43, 30, 23, 0.95);
+    /* Навігація в єдиному стилі сайту */
+    .navbar {
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 15px 0;
     }
 
-    .navbar-brand-custom {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .navbar-brand-custom img {
-      height: 45px;
-      width: auto;
-    }
-
-    .brand-text span {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      line-height: 1.2;
-    }
-
-    .brand-text small {
-      font-size: 0.65rem;
-      letter-spacing: 2px;
-      color: #d4a373;
-      text-transform: uppercase;
+    .navbar-brand img {
+      width: 80px;
     }
 
     .navbar-nav .nav-link {
+      font-size: 1.15rem;
+      padding: 0.75rem 1.25rem !important;
       color: #e0e0e0 !important;
-      font-weight: 500;
-      padding: 8px 16px !important;
-      transition: color 0.2s ease;
+      transition: color 0.3s ease;
     }
 
     .navbar-nav .nav-link:hover,
     .navbar-nav .nav-link.active {
-      color: #d4a373 !important;
+      color: #ffc107 !important;
     }
 
-    .nav-btn-outline {
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 30px;
-      padding: 6px 18px !important;
-      color: #fff !important;
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
-    }
-
-    .nav-btn-outline:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: #d4a373;
-    }
-
-    /* Hero секція як на скріншоті */
     .gd-hero {
-      position: relative;
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75)), url('images3.jpg') center/cover no-repeat;
-      padding: 120px 20px 60px;
+      padding: 120px 20px 40px;
       text-align: center;
-      color: #fff;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75)), url('images3.jpg') center/cover no-repeat;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .gd-hero-badge {
-      display: inline-block;
-      border: 1px solid rgba(212, 163, 115, 0.4);
-      border-radius: 30px;
-      padding: 6px 18px;
-      font-size: 0.85rem;
-      color: #d4a373;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
     }
 
     .gd-hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
       color: #fff;
-      margin-bottom: 16px;
-      font-weight: 500;
-    }
-
-    .gd-hero h1 span {
-      color: #d4a373;
-      font-style: italic;
     }
 
     .gd-hero p {
-      max-width: 750px;
-      margin: 0 auto 30px;
-      color: #d0d0d0;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
-    /* Кнопки дії в Hero */
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-
-    .hero-btn {
-      border-radius: 30px;
-      padding: 12px 28px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-btn-primary {
-      background: #f4f1ea;
-      color: #2b1e17;
-      border: 1px solid #f4f1ea;
-    }
-
-    .hero-btn-primary:hover {
-      background: #e2ded4;
-      color: #2b1e17;
-    }
-
-    .hero-btn-secondary {
-      background: rgba(0, 0, 0, 0.4);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(5px);
-    }
-
-    .hero-btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: #d4a373;
-      color: #fff;
-    }
-
-    /* Мета-інформація під кнопками в Hero */
-    .hero-meta {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      font-size: 0.9rem;
-      color: #b0b0b0;
-      padding-top: 15px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      max-width: 900px;
+      max-width: 800px;
       margin: 0 auto;
-    }
-
-    .hero-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #d0d0d0;
     }
 
     .gd-wrap {
@@ -198,14 +79,15 @@
       padding: 40px 16px 70px;
     }
 
-    /* Картки */
+    /* Картки у стилі сайту (dark translucent) */
     .gd-card {
-      background: rgba(35, 25, 20, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 18px;
       padding: 30px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
       margin-bottom: 28px;
+      color: #fff;
       backdrop-filter: blur(10px);
     }
 
@@ -213,7 +95,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.6rem;
       color: #fff;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .gd-muted {
@@ -239,7 +121,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 3.6rem;
       line-height: 1;
-      color: #d4a373;
+      color: #ffc107;
     }
 
     .gd-bar-row {
@@ -249,12 +131,12 @@
       align-items: center;
       margin-bottom: 8px;
       font-size: 0.9rem;
-      color: #d0d0d0;
+      color: #e0e0e0;
     }
 
     .gd-bar {
       height: 9px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 999px;
       overflow: hidden;
     }
@@ -262,7 +144,7 @@
     .gd-bar span {
       display: block;
       height: 100%;
-      background: #d4a373;
+      background: #ffc107;
       border-radius: 999px;
       transition: width 0.6s ease;
     }
@@ -279,7 +161,7 @@
       height: 18px;
     }
 
-    /* Форма */
+    /* Стилі для форми */
     .gd-field {
       margin-bottom: 18px;
     }
@@ -297,17 +179,23 @@
       padding: 12px 14px;
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 10px;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.1);
       color: #fff;
       font-family: inherit;
       font-size: 1rem;
     }
 
+    .gd-field input::placeholder,
+    .gd-field textarea::placeholder {
+      color: #b0b0b0;
+    }
+
     .gd-field input:focus,
     .gd-field textarea:focus {
       outline: none;
-      border-color: #d4a373;
-      box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+      border-color: #A47363;
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 0.25rem rgba(164, 115, 99, 0.25);
     }
 
     .gd-chips {
@@ -318,8 +206,8 @@
 
     .gd-chip {
       border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(0, 0, 0, 0.2);
-      color: #d0d0d0;
+      background: rgba(255, 255, 255, 0.05);
+      color: #e0e0e0;
       border-radius: 999px;
       padding: 7px 14px;
       font-family: inherit;
@@ -329,15 +217,14 @@
     }
 
     .gd-chip:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
       color: #fff;
     }
 
     .gd-chip[aria-pressed="true"] {
-      background: #d4a373;
-      border-color: #d4a373;
-      color: #2b1e17;
-      font-weight: 500;
+      background: #8D5B4C;
+      border-color: #A47363;
+      color: #fff;
     }
 
     .gd-rating-input {
@@ -358,23 +245,28 @@
       height: 32px;
     }
 
+    /* Фірмова кнопка */
     .gd-submit {
       width: 100%;
-      background: #d4a373;
-      color: #2b1e17;
-      border: 2px solid #d4a373;
-      border-radius: 10px;
+      background-color: #8D5B4C;
+      color: #ffffff;
+      border: 2px solid #A47363;
+      border-radius: 30px;
       padding: 14px;
       font-family: inherit;
       font-size: 1.05rem;
-      font-weight: 600;
+      font-weight: 500;
+      letter-spacing: 1px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
     }
 
     .gd-submit:hover:not(:disabled) {
-      background: #e2b78d;
-      border-color: #e2b78d;
+      background-color: #794A3D;
+      border-color: #8D5B4C;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     }
 
     .gd-submit:disabled {
@@ -395,12 +287,12 @@
     }
 
     .gd-review {
-      background: rgba(35, 25, 20, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-left: 4px solid #d4a373;
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-left: 4px solid #ffc107;
       border-radius: 14px;
-      padding: 20px 22px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
     .gd-review-head {
@@ -415,8 +307,8 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: rgba(212, 163, 115, 0.2);
-      color: #d4a373;
+      background: #8D5B4C;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -425,7 +317,7 @@
 
     .gd-badge {
       background: rgba(255, 255, 255, 0.1);
-      color: #d0d0d0;
+      color: #e0e0e0;
       border-radius: 999px;
       padding: 3px 12px;
       font-size: 0.8rem;
@@ -440,36 +332,37 @@
 
     .gd-review p {
       margin: 0;
-      color: #d0d0d0;
+      color: #e0e0e0;
       line-height: 1.6;
     }
 
     .gd-owner-note {
       margin-top: 14px;
-      background: rgba(212, 163, 115, 0.1);
+      background: rgba(141, 91, 76, 0.25);
+      border: 1px solid rgba(164, 115, 99, 0.4);
       border-radius: 10px;
       padding: 14px 16px;
       font-size: 0.95rem;
-      color: #f4f1ea;
+      color: #fff;
     }
 
     .gd-more {
       display: block;
-      margin: 26px auto 0;
+      margin: 30px auto 0;
       background: transparent;
-      border: 2px solid #d4a373;
-      color: #d4a373;
-      border-radius: 999px;
-      padding: 12px 28px;
+      border: 2px solid #A47363;
+      color: #fff;
+      border-radius: 30px;
+      padding: 12px 32px;
       font-family: inherit;
       font-size: 1rem;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
 
     .gd-more:hover {
-      background: #d4a373;
-      color: #2b1e17;
+      background: #8D5B4C;
+      border-color: #8D5B4C;
     }
 
     .gd-success {
@@ -482,41 +375,31 @@
     }
 
     footer {
-      background: rgba(20, 15, 12, 0.95);
+      background: rgba(0, 0, 0, 0.85);
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 30px 0;
-      text-align: center;
-      color: #999;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Навігаційна панель -->
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+  <!-- Навігація -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand navbar-brand-custom" href="index.html">
+      <a class="navbar-brand" href="index.html">
         <img src="Logo 2.png" alt="Гостинний двір">
-        <div class="brand-text">
-          <span>Гостинний Двір</span>
-          <small>ресторан · готель · баня</small>
-        </div>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Перемикач навігації">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav ms-auto align-items-lg-center">
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Головна</a></li>
           <li class="nav-item"><a class="nav-link" href="menu.html">Меню</a></li>
           <li class="nav-item"><a class="nav-link" href="hotel.html">Готель</a></li>
           <li class="nav-item"><a class="nav-link" href="banya.html">Баня</a></li>
-          <li class="nav-item"><a class="nav-link active" href="reviews.html">Відгуки</a></li>
           <li class="nav-item"><a class="nav-link" href="contacts.html">Контакти</a></li>
-          <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-            <a href="index.html" class="nav-link nav-btn-outline">На сайт</a>
-          </li>
+          <li class="nav-item"><a class="nav-link active" href="reviews.html">Відгуки</a></li>
         </ul>
       </div>
     </div>
@@ -525,36 +408,8 @@
   <!-- Hero секція -->
   <section class="gd-hero">
     <div class="container">
-      <span class="gd-hero-badge">Відгуки наших гостей</span>
-      <h1>Гостинний <span>Двір</span></h1>
-      <p>
-        Затишна атмосфера, гостинність і душевні домашні страви. Читайте враження гостей про ресторан, готель і баню — і розкажіть про свій відпочинок.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#gd-form-section" class="hero-btn hero-btn-primary">
-          ✎ Залишити відгук
-        </a>
-        <a href="#gd-list-section" class="hero-btn hero-btn-secondary">
-          Читати відгуки ↓
-        </a>
-        <a href="menu.html" class="hero-btn hero-btn-secondary">
-          Меню
-        </a>
-      </div>
-
-      <div class="hero-meta">
-        <div class="hero-meta-item">
-          <span class="gd-stars" id="gd-hero-stars">★★★★★</span>
-          <span id="gd-hero-avg">0,0</span> із 5,0 · <span id="gd-hero-count">0 відгуків</span>
-        </div>
-        <div class="hero-meta-item">
-          📍 м. Городище, Черкаська область, вул. Франка 1
-        </div>
-        <div class="hero-meta-item">
-          📞 +38 (097) 578-7555
-        </div>
-      </div>
+      <h1>Відгуки наших гостей</h1>
+      <p>Діліться своїми враженнями про відпочинок у «Гостинному дворі» — про ресторан, готель або баню.</p>
     </div>
   </section>
 
@@ -574,7 +429,7 @@
     </div>
 
     <!-- Форма -->
-    <section class="gd-card" id="gd-form-section">
+    <section class="gd-card">
       <h2>Залишити відгук</h2>
       <p class="gd-muted" style="margin-bottom:20px;">
         Відгук публікується після перевірки адміністрацією — зазвичай протягом доби.
@@ -622,7 +477,7 @@
     </section>
 
     <!-- Список відгуків -->
-    <section id="gd-list-section">
+    <section>
       <h2 style="font-family:'Playfair Display',serif; color:#fff; margin-bottom:6px;">Що говорять наші відвідувачі</h2>
       <p class="gd-muted" id="gd-list-count" style="margin-bottom:20px;">Завантажуємо…</p>
       <div class="gd-list" id="gd-list"></div>
@@ -631,10 +486,8 @@
 
   </main>
 
-  <footer>
-    <div class="container">
-      <p class="mb-0">&copy; 2026 Гостинний двір. Всі права захищені.</p>
-    </div>
+  <footer class="text-center py-4 text-white-50">
+    <p class="mb-0">&copy; 2026 Гостинний двір. Всі права захищені.</p>
   </footer>
 
   <script>
@@ -662,8 +515,8 @@
     function starIcon(filled, size) {
       var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svg.setAttribute("viewBox", "0 0 24 24");
-      svg.setAttribute("fill", filled ? "#d4a373" : "none");
-      svg.setAttribute("stroke", filled ? "#d4a373" : "rgba(255,255,255,0.3)");
+      svg.setAttribute("fill", filled ? "#ffc107" : "none");
+      svg.setAttribute("stroke", filled ? "#ffc107" : "rgba(255,255,255,0.3)");
       svg.setAttribute("stroke-width", "1.8");
       if (size) { svg.style.width = size + "px"; svg.style.height = size + "px"; }
       var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -728,25 +581,14 @@
       var sum = rows.reduce(function (acc, r) { return acc + Number(r.rating || 0); }, 0);
       var average = total ? sum / total : 0;
 
-      var avgFormatted = total ? average.toFixed(1).replace(".", ",") : "0,0";
-      var totalFormatted = pluralReviews(total);
-
-      document.getElementById("gd-average").textContent = avgFormatted;
+      document.getElementById("gd-average").textContent = total ? average.toFixed(1).replace(".", ",") : "—";
       document.getElementById("gd-total").textContent = total
-        ? totalFormatted + " — усі пройшли перевірку адміністрацією"
+        ? pluralReviews(total) + " — усі пройшли перевірку адміністрацією"
         : "Відгуків ще немає — станьте першим!";
-
-      // Оновлення героїчної плашки зверху
-      document.getElementById("gd-hero-avg").textContent = avgFormatted;
-      document.getElementById("gd-hero-count").textContent = totalFormatted;
 
       var starsHolder = document.getElementById("gd-average-stars");
       starsHolder.innerHTML = "";
       starsHolder.appendChild(starsRow(average));
-
-      var heroStars = document.getElementById("gd-hero-stars");
-      heroStars.innerHTML = "";
-      heroStars.appendChild(starsRow(average));
 
       var bars = document.getElementById("gd-bars");
       bars.innerHTML = "";
