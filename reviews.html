@@ -19,8 +19,6 @@
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #121212;
-      color: #fff;
     }
 
     .hero-content h1 {
@@ -72,7 +70,7 @@
       margin-bottom: 10px;
     }
 
-    /* Стилі для форми та елементів завантаження файлу */
+    /* Стилі для форми */
     .form-label {
       font-weight: 500;
       color: #e0e0e0;
@@ -84,27 +82,6 @@
       color: #fff;
       border-radius: 10px;
       padding: 12px;
-    }
-
-    .form-control[type="file"] {
-      padding: 10px 14px;
-      cursor: pointer;
-      color: #b0b0b0;
-    }
-
-    .form-control[type="file"]::file-selector-button {
-      background-color: #8D5B4C;
-      color: #ffffff;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 6px;
-      margin-right: 15px;
-      transition: background-color 0.3s ease;
-      cursor: pointer;
-    }
-
-    .form-control[type="file"]::file-selector-button:hover {
-      background-color: #794A3D;
     }
 
     .form-control:focus, .form-select:focus {
@@ -121,31 +98,6 @@
 
     .form-control::placeholder {
       color: #b0b0b0;
-    }
-
-    /* Стиль для відображення фото у картці відгуку */
-    .review-photo-container {
-      margin-top: 12px;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      max-height: 220px;
-    }
-
-    .review-photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Адмін-панель */
-    .admin-panel {
-      background: rgba(141, 91, 76, 0.15);
-      border: 1px dashed #A47363;
-      border-radius: 18px;
-      padding: 25px;
-      margin-bottom: 40px;
     }
 
     /* Фірмова кнопка */
@@ -183,7 +135,7 @@
 <body>
 
 <!-- Навігація -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark border-bottom border-secondary">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="index.html">
       <img src="Logo 2.png" width="80" alt="Логотип">
@@ -192,15 +144,24 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto align-items-center">
-        <li class="nav-item"><a class="nav-link" href="index.html">Головна</a></li>
-        <li class="nav-item"><a class="nav-link" href="menu.html">Меню</a></li>
-        <li class="nav-item"><a class="nav-link" href="hotel.html">Готель</a></li>
-        <li class="nav-item"><a class="nav-link" href="banya.html">Баня</a></li>
-        <li class="nav-item"><a class="nav-link active" href="reviews.html">Відгуки</a></li>
-        <li class="nav-item"><a class="nav-link" href="contacts.html">Контакти</a></li>
-        <li class="nav-item ms-lg-3">
-          <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#adminAuthModal">🔒 Кабінет власника</button>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Головна</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="menu.html">Меню</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="hotel.html">Готель</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="banya.html">Баня</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="reviews.html">Відгуки</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contacts.html">Контакти</a>
         </li>
       </ul>
     </div>
@@ -208,8 +169,8 @@
 </nav>
 
 <!-- Hero секція -->
-<section class="hero py-5 mt-5">
-  <div class="hero-content text-center py-5">
+<section class="hero">
+  <div class="hero-content text-center">
     <h1>Відгуки Гостей</h1>
     <p>
       Діліться своїми враженнями про відпочинок у «Гостинному дворі» та читайте відгуки наших відвідувачів!
@@ -218,20 +179,8 @@
 </section>
 
 <!-- Основний контент -->
-<section class="section section-dark py-4">
+<section class="section section-dark">
   <div class="container py-4">
-
-    <!-- Панель модерації для власника (відображається після входу) -->
-    <div id="adminSection" class="admin-panel" style="display: none;">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="text-warning mb-0" style="font-family: 'Playfair Display', serif;">Панель власника (Модерація відгуків)</h3>
-        <button class="btn btn-sm btn-outline-danger" onclick="logoutAdmin()">Вийти з акаунту</button>
-      </div>
-      <p class="text-white-50">Нижче наведено нові відгуки, які очікують на перевірку та схвалення перед публікацією:</p>
-      <div id="pendingReviewsContainer" class="row g-4">
-        <!-- Неопубліковані відгуки -->
-      </div>
-    </div>
 
     <!-- Секція форми -->
     <div class="row justify-content-center mb-5">
@@ -256,14 +205,9 @@
                 </select>
               </div>
 
-              <div class="mb-3">
+              <div class="mb-4">
                 <label for="reviewText" class="form-label">Ваш відгук:</label>
                 <textarea class="form-control" id="reviewText" rows="4" placeholder="Розкажіть про свої враження..." required></textarea>
-              </div>
-
-              <div class="mb-4">
-                <label for="reviewPhoto" class="form-label">Фото до відгуку (необов'язково):</label>
-                <input type="file" class="form-control" id="reviewPhoto" accept="image/*">
               </div>
 
               <div class="text-center">
@@ -280,329 +224,73 @@
     <!-- Заголовок списку відгуків -->
     <h2 class="text-center mb-4" style="font-family: 'Playfair Display', serif;">Що говорять наші відвідувачі</h2>
 
-    <!-- Список опублікованих відгуків -->
+    <!-- Список відгуків -->
     <div id="reviewsContainer" class="row g-4">
-      <!-- Динамічні опубліковані відгуки -->
+      
+      <!-- Приклад відгуку 1 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3>Олександр</h3>
+                <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+              </div>
+              <p>Чудове місце для відпочинку! Дуже затишний готель та неймовірна баня. Рекомендую всім!</p>
+            </div>
+            <div class="mt-3">
+              <small class="review-date">12 жовтня 2026</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
 </section>
 
-<!-- Модальне вікно Авторизації / Реєстрації власника -->
-<div class="modal fade" id="adminAuthModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content bg-dark text-white border-secondary">
-      <div class="modal-header">
-        <h5 class="modal-title" style="font-family: 'Playfair Display', serif;">Кабінет власника сайту</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрити"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Перемикач Реєстрація / Вхід -->
-        <ul class="nav nav-pills mb-3 justify-content-center" id="authTabs" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active btn-sm" id="login-tab" data-bs-toggle="pill" data-bs-target="#loginFormPane" type="button">Вхід</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link btn-sm" id="register-tab" data-bs-toggle="pill" data-bs-target="#registerFormPane" type="button">Реєстрація власника</button>
-          </li>
-        </ul>
-
-        <div class="tab-content" id="authTabContent">
-          <!-- Форма Входу -->
-          <div class="tab-pane fade show active" id="loginFormPane">
-            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
-              <div class="mb-3">
-                <label class="form-label">Email власника:</label>
-                <input type="email" class="form-control" id="loginEmail" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Пароль:</label>
-                <input type="password" class="form-control" id="loginPassword" required>
-              </div>
-              <button type="submit" class="btn btn-book w-100">Увійти</button>
-            </form>
-          </div>
-
-          <!-- Форма Реєстрації -->
-          <div class="tab-pane fade" id="registerFormPane">
-            <form id="adminRegisterForm" onsubmit="handleAdminRegister(event)">
-              <div class="mb-3">
-                <label class="form-label">Ім'я власника:</label>
-                <input type="text" class="form-control" id="regName" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Email:</label>
-                <input type="email" class="form-control" id="regEmail" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Пароль:</label>
-                <input type="password" class="form-control" id="regPassword" required>
-              </div>
-              <button type="submit" class="btn btn-book w-100">Зареєструватись</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Модальне вікно Редагування відгуку -->
-<div class="modal fade" id="editReviewModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content bg-dark text-white border-secondary">
-      <div class="modal-header">
-        <h5 class="modal-title" style="font-family: 'Playfair Display', serif;">Редагувати відгук</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрити"></button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="editIndex">
-        <div class="mb-3">
-          <label class="form-label">Ім'я автора:</label>
-          <input type="text" class="form-control" id="editName">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Оцінка:</label>
-          <select class="form-select" id="editRating">
-            <option value="5">⭐⭐⭐⭐⭐</option>
-            <option value="4">⭐⭐⭐⭐</option>
-            <option value="3">⭐⭐⭐</option>
-            <option value="2">⭐⭐</option>
-            <option value="1">⭐</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Текст відгуку:</label>
-          <textarea class="form-control" id="editText" rows="4"></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
-        <button type="button" class="btn btn-book" onclick="saveEditedReview()">Зберегти зміни</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <footer class="text-center py-4 text-white-50" style="background: rgba(0,0,0,0.8);">
   <p class="mb-0">&copy; 2026 Гостинний двір. Всі права захищені.</p>
 </footer>
 
-<!-- Скрипти керування відгуками, фото та адмін-панеллю -->
+<!-- Скрипт додавання відгуків -->
 <script>
-  // Завантаження збережених даних із localStorage або базовий шаблон
-  let reviews = JSON.parse(localStorage.getItem('gd_reviews')) || [
-    {
-      name: "Олександр",
-      rating: 5,
-      text: "Чудове місце для відпочинку! Дуже затишний готель та неймовірна баня. Рекомендую всім!",
-      photo: null,
-      date: "12 жовтня 2026",
-      status: "published"
-    }
-  ];
-
-  let adminData = JSON.parse(localStorage.getItem('gd_admin')) || null;
-  let isLoggedAdmin = localStorage.getItem('gd_is_logged') === 'true';
-
   const reviewForm = document.getElementById('reviewForm');
   const reviewsContainer = document.getElementById('reviewsContainer');
-  const pendingReviewsContainer = document.getElementById('pendingReviewsContainer');
-  const adminSection = document.getElementById('adminSection');
 
-  // Ініціалізація при завантаженні сторінки
-  document.addEventListener('DOMContentLoaded', () => {
-    renderReviews();
-    checkAdminSession();
-  });
-
-  // Збереження та оновлення інтерфейсу
-  function saveAndRender() {
-    localStorage.setItem('gd_reviews', JSON.stringify(reviews));
-    renderReviews();
-  }
-
-  // Рендеринг відгуків на сторінці
-  function renderReviews() {
-    reviewsContainer.innerHTML = '';
-    pendingReviewsContainer.innerHTML = '';
-    let hasPending = false;
-
-    reviews.forEach((review, index) => {
-      const ratingStars = '⭐'.repeat(review.rating);
-      const cardHTML = `
-        <div class="col-md-6 col-lg-4">
-          <div class="card-custom">
-            <div class="card-body d-flex flex-column justify-content-between">
-              <div>
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <h3>${review.name}</h3>
-                  <span class="rating-stars">${ratingStars}</span>
-                </div>
-                <p>${review.text}</p>
-                ${review.photo ? `
-                  <div class="review-photo-container">
-                    <img src="\${review.photo}" alt="Фото від гостя" class="review-photo">
-                  </div>
-                ` : ''}
-              </div>
-              <div class="mt-3 d-flex justify-content-between align-items-center">
-                <small class="review-date">${review.date}</small>
-                ${isLoggedAdmin ? `
-                  <div class="admin-actions d-flex gap-1">
-                    \${review.status === 'pending' ? `<button class="btn btn-sm btn-success" onclick="approveReview(${index})">Схвалити</button>` : ''}
-                    <button class="btn btn-sm btn-outline-light" onclick="openEditModal(\${index})">✏️</button>
-                    <button class="btn btn-sm btn-outline-danger" onclick="deleteReview(\${index})">🗑️</button>
-                  </div>
-                ` : ''}
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-
-      if (review.status === 'published') {
-        reviewsContainer.insertAdjacentHTML('afterbegin', cardHTML);
-      } else if (isLoggedAdmin) {
-        hasPending = true;
-        pendingReviewsContainer.insertAdjacentHTML('afterbegin', cardHTML);
-      }
-    });
-
-    if (isLoggedAdmin && !hasPending) {
-      pendingReviewsContainer.innerHTML = '<p class="text-white-50 text-center mb-0">Немає нових відгуків на модерації.</p>';
-    }
-  }
-
-  // Додавання нового відгуку гостем
   reviewForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
     const name = document.getElementById('reviewerName').value;
     const ratingValue = Number(document.getElementById('reviewRating').value);
+    const ratingStars = '⭐'.repeat(ratingValue);
     const text = document.getElementById('reviewText').value;
-    const photoInput = document.getElementById('reviewPhoto');
     const date = new Date().toLocaleDateString('uk-UA', { year: 'numeric', month: 'long', day: 'numeric' });
 
-    function insertReview(photoUrl) {
-      reviews.push({
-        name: name,
-        rating: ratingValue,
-        text: text,
-        photo: photoUrl,
-        date: date,
-        status: 'pending' // Потребує схвалення власником
-      });
+    const newCol = document.createElement('div');
+    newCol.className = 'col-md-6 col-lg-4';
+    newCol.innerHTML = `
+      <div class="card-custom">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h3>${name}</h3>
+              <span class="rating-stars">${ratingStars}</span>
+            </div>
+            <p>${text}</p>
+          </div>
+          <div class="mt-3">
+            <small class="review-date">${date}</small>
+          </div>
+        </div>
+      </div>
+    `;
 
-      saveAndRender();
-      reviewForm.reset();
-      alert('Дякуємо! Ваш відгук успішно надіслано і він з'явлитися на сайті після перевірки власником.');
-    }
-
-    if (photoInput.files && photoInput.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        insertReview(event.target.result);
-      };
-      reader.readAsDataURL(photoInput.files[0]);
-    } else {
-      insertReview(null);
-    }
+    reviewsContainer.prepend(newCol);
+    reviewForm.reset();
+    alert('Дякуємо! Ваш відгук успішно додано.');
   });
-
-  // --- Реєстрація та Вхід власника сайту ---
-  function handleAdminRegister(e) {
-    e.preventDefault();
-    const name = document.getElementById('regName').value;
-    const email = document.getElementById('regEmail').value;
-    const password = document.getElementById('regPassword').value;
-
-    adminData = { name, email, password };
-    localStorage.setItem('gd_admin', JSON.stringify(adminData));
-    
-    alert('Реєстрація власника успішна! Тепер ви можете увійти в систему.');
-    // Перемикаємось на вкладку входу
-    document.getElementById('login-tab').click();
-  }
-
-  function handleAdminLogin(e) {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-
-    if (!adminData) {
-      alert('Будь ласка, спочатку зареєструйтесь як власник сайту!');
-      return;
-    }
-
-    if (adminData.email === email && adminData.password === password) {
-      isLoggedAdmin = true;
-      localStorage.setItem('gd_is_logged', 'true');
-      
-      // Закриваємо модальне вікно
-      const modalEl = document.getElementById('adminAuthModal');
-      const modal = bootstrap.Modal.getInstance(modalEl);
-      modal.hide();
-
-      checkAdminSession();
-      renderReviews();
-      alert('Вітаємо, ви успішно увійшли в кабінет власника!');
-    } else {
-      alert('Невірний Email або пароль!');
-    }
-  }
-
-  function logoutAdmin() {
-    isLoggedAdmin = false;
-    localStorage.setItem('gd_is_logged', 'false');
-    checkAdminSession();
-    renderReviews();
-    alert('Ви вийшли з кабінету власника.');
-  }
-
-  function checkAdminSession() {
-    if (isLoggedAdmin) {
-      adminSection.style.display = 'block';
-    } else {
-      adminSection.style.display = 'none';
-    }
-  }
-
-  // --- Функції модерації та редагування ---
-  function approveReview(index) {
-    reviews[index].status = 'published';
-    saveAndRender();
-  }
-
-  function deleteReview(index) {
-    if (confirm('Ви впевнені, що хочете видалити цей відгук?')) {
-      reviews.splice(index, 1);
-      saveAndRender();
-    }
-  }
-
-  let currentEditIndex = null;
-  function openEditModal(index) {
-    currentEditIndex = index;
-    const rev = reviews[index];
-    document.getElementById('editName').value = rev.name;
-    document.getElementById('editRating').value = rev.rating;
-    document.getElementById('editText').value = rev.text;
-    
-    const modal = new bootstrap.Modal(document.getElementById('editReviewModal'));
-    modal.show();
-  }
-
-  function saveEditedReview() {
-    if (currentEditIndex !== null) {
-      reviews[currentEditIndex].name = document.getElementById('editName').value;
-      reviews[currentEditIndex].rating = Number(document.getElementById('editRating').value);
-      reviews[currentEditIndex].text = document.getElementById('editText').value;
-      
-      saveAndRender();
-      bootstrap.Modal.getInstance(document.getElementById('editReviewModal')).hide();
-    }
-  }
 </script>
 
 </body>
