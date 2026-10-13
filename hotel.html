@@ -57,9 +57,9 @@
 
     .card-custom img {
       width: 100%;
-      height: 260px;
-      object-fit: contain; /* Забезпечує показ фото цілком без обрізання */
-      background-color: #1a1a1a; /* Гарний темний фон для полів */
+      height: 330px; /* Збільшено висоту, щоб вмістити весь опис на фото */
+      object-fit: cover; /* Заповнює всю ширину рамки без чорних полів */
+      object-position: top center; /* Центрує зображення від верху */
       filter: brightness(0.95);
     }
 
