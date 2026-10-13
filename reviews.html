@@ -36,16 +36,6 @@
       margin: 0 auto 10px;
     }
 
-    .section-dark p {
-      font-size: 1.15rem;
-      line-height: 1.8;
-    }
-
-    .navbar-nav .nav-link {
-      font-size: 1.25rem;
-      padding: 0.75rem 1.25rem;
-    }
-
     /* Картки у стилі сайту */
     .card-custom {
       background: rgba(0, 0, 0, 0.65);
@@ -147,6 +137,15 @@
       color: #a0a0a0;
       font-size: 0.85rem;
     }
+
+    /* Адмін-панель */
+    .admin-panel {
+      background: rgba(141, 91, 76, 0.15);
+      border: 1px dashed #A47363;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 40px;
+    }
   </style>
 </head>
 <body>
@@ -161,24 +160,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="index.html">Головна</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="menu.html">Меню</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="hotel.html">Готель</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="banya.html">Баня</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="contacts.html">Контакти</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="reviews.html">Відгуки</a>
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Головна</a></li>
+        <li class="nav-item"><a class="nav-link" href="menu.html">Меню</a></li>
+        <li class="nav-item"><a class="nav-link" href="hotel.html">Готель</a></li>
+        <li class="nav-item"><a class="nav-link" href="banya.html">Баня</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacts.html">Контакти</a></li>
+        <li class="nav-item"><a class="nav-link active" href="reviews.html">Відгуки</a></li>
+        <li class="nav-item ms-lg-3">
+          <button class="btn btn-sm btn-outline-warning" onclick="toggleAdminMode()">🔒 Адмін-панель</button>
         </li>
       </ul>
     </div>
@@ -198,6 +188,15 @@
 <!-- Основний контент -->
 <section class="section section-dark py-4">
   <div class="container py-4">
+
+    <!-- Адмін-панель модерації (прихована за замовчуванням) -->
+    <div id="adminSection" class="admin-panel" style="display: none;">
+      <h3 class="mb-3 text-warning">Панель модератора (Неопубліковані відгуки)</h3>
+      <div id="pendingReviewsContainer" class="row g-4">
+        <!-- Сюди завантажуються відгуки на перевірку -->
+      </div>
+      <hr class="border-secondary my-4">
+    </div>
 
     <!-- Секція форми -->
     <div class="row justify-content-center mb-5">
@@ -227,7 +226,6 @@
                 <textarea class="form-control" id="reviewText" rows="4" placeholder="Розкажіть про свої враження..." required></textarea>
               </div>
 
-              <!-- Поле для завантаження фотографії -->
               <div class="mb-4">
                 <label for="reviewPhoto" class="form-label">Фото до відгуку (необов'язково):</label>
                 <input type="file" class="form-control" id="reviewPhoto" accept="image/*">
@@ -247,89 +245,215 @@
     <!-- Заголовок списку відгуків -->
     <h2 class="text-center mb-4" style="font-family: 'Playfair Display', serif;">Що говорять наші відвідувачі</h2>
 
-    <!-- Список відгуків -->
+    <!-- Список опублікованих відгуків -->
     <div id="reviewsContainer" class="row g-4">
-      
-      <!-- Приклад відгуку 1 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card-custom">
-          <div class="card-body d-flex flex-column justify-content-between">
-            <div>
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h3>Олександр</h3>
-                <span class="rating-stars">⭐⭐⭐⭐⭐</span>
-              </div>
-              <p>Чудове місце для відпочинку! Дуже затишний готель та неймовірна баня. Рекомендую всім!</p>
-            </div>
-            <div class="mt-3">
-              <small class="review-date">12 жовтня 2026</small>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <!-- Динамічні картки -->
     </div>
 
   </div>
 </section>
 
+<!-- Модальне вікно для редагування відгуку -->
+<div class="modal fade" id="editReviewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white border-secondary">
+      <div class="modal-header">
+        <h5 class="modal-title">Редагувати відгук</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрити"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editIndex">
+        <div class="mb-3">
+          <label class="form-label">Ім'я:</label>
+          <input type="text" class="form-control" id="editName">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Оцінка:</label>
+          <select class="form-select" id="editRating">
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Відгук:</label>
+          <textarea class="form-control" id="editTexт" rows="4"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-book" onclick="saveEditedReview()">Зберегти зміни</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer class="text-center py-4 text-white-50" style="background: rgba(0,0,0,0.8);">
   <p class="mb-0">&copy; 2026 Гостинний двір. Всі права захищені.</p>
 </footer>
 
-<!-- Скрипт додавання відгуків із підтримкою фото -->
+<!-- Скрипт модерації, збереження, редагування та видалення відгуків -->
 <script>
+  let reviews = JSON.parse(localStorage.getItem('gd_reviews')) || [
+    {
+      name: "Олександр",
+      rating: 5,
+      text: "Чудове місце для відпочинку! Дуже затишний готель та неймовірна баня. Рекомендую всім!",
+      photo: null,
+      date: "12 жовтня 2026",
+      status: "published" // published або pending
+    }
+  ];
+
   const reviewForm = document.getElementById('reviewForm');
   const reviewsContainer = document.getElementById('reviewsContainer');
+  const pendingReviewsContainer = document.getElementById('pendingReviewsContainer');
+  const adminSection = document.getElementById('adminSection');
 
-  reviewForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('reviewerName').value;
-    const ratingValue = Number(document.getElementById('reviewRating').value);
-    const ratingStars = '⭐'.repeat(ratingValue);
-    const text = document.getElementById('reviewText').value;
-    const photoInput = document.getElementById('reviewPhoto');
-    const date = new Date().toLocaleDateString('uk-UA', { year: 'numeric', month: 'long', day: 'numeric' });
+  function saveAndRender() {
+    localStorage.setItem('gd_reviews', JSON.stringify(reviews));
+    renderReviews();
+  }
 
-    function createReviewCard(photoUrl) {
-      const newCol = document.createElement('div');
-      newCol.className = 'col-md-6 col-lg-4';
-      newCol.innerHTML = `
-        <div class="card-custom">
-          <div class="card-body d-flex flex-column justify-content-between">
-            <div>
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h3>${name}</h3>
-                <span class="rating-stars">${ratingStars}</span>
+  function renderReviews() {
+    reviewsContainer.innerHTML = '';
+    pendingReviewsContainer.innerHTML = '';
+
+    let hasPending = false;
+
+    reviews.forEach((review, index) => {
+      const ratingStars = '⭐'.repeat(review.rating);
+      const cardHTML = `
+        <div class="col-md-6 col-lg-4">
+          <div class="card-custom">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3>${review.name}</h3>
+                  <span class="rating-stars">${ratingStars}</span>
+                </div>
+                <p>${review.text}</p>
+                ${review.photo ? `<img src="\${review.photo}" alt="Фото від гостя" class="review-photo">` : ''}
               </div>
-              <p>${text}</p>
-              ${photoUrl ? `<img src="\${photoUrl}" alt="Фото від гостя" class="review-photo">` : ''}
-            </div>
-            <div class="mt-3">
-              <small class="review-date">${date}</small>
+              <div class="mt-3 d-flex justify-content-between align-items-center">
+                <small class="review-date">${review.date}</small>
+                <div class="admin-actions" style="display: none;">
+                  ${review.status === 'pending' ? `<button class="btn btn-sm btn-success me-1" onclick="approveReview(\${index})">Опублікувати</button>` : ''}
+                  <button class="btn btn-sm btn-outline-light me-1" onclick="openEditModal(${index})">✏️</button>
+                  <button class="btn btn-sm btn-outline-danger" onclick="deleteReview(${index})">🗑️</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       `;
 
-      reviewsContainer.prepend(newCol);
-      reviewForm.reset();
-      alert('Дякуємо! Ваш відгук успішно додано.');
+      if (review.status === 'published') {
+        reviewsContainer.insertAdjacentHTML('afterbegin', cardHTML);
+      } else {
+        hasPending = true;
+        pendingReviewsContainer.insertAdjacentHTML('afterbegin', cardHTML);
+      }
+    });
+
+    if (!hasPending) {
+      pendingReviewsContainer.innerHTML = '<p class="text-muted text-center">Немає нових відгуків на модерації.</p>';
     }
 
-    // Перевіряємо, чи завантажив користувач фото
+    // Оновлюємо статус видимості кнопок адміністратора
+    toggleAdminMode(true);
+  }
+
+  // Обробка відправки форми нового відгуку
+  reviewForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('reviewerName').value;
+    const ratingValue = Number(document.getElementById('reviewRating').value);
+    const text = document.getElementById('reviewText').value;
+    const photoInput = document.getElementById('reviewPhoto');
+    const date = new Date().toLocaleDateString('uk-UA', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    function addNewReview(photoUrl) {
+      reviews.push({
+        name: name,
+        rating: ratingValue,
+        text: text,
+        photo: photoUrl,
+        date: date,
+        status: 'pending' // Потребує модерації перед публікацією
+      });
+
+      saveAndRender();
+      reviewForm.reset();
+      alert('Дякуємо! Ваш відгук успішно надіслано на перевірку адміністратору.');
+    }
+
     if (photoInput.files && photoInput.files[0]) {
       const reader = new FileReader();
       reader.onload = function(event) {
-        createReviewCard(event.target.result);
+        addNewReview(event.target.result);
       };
       reader.readAsDataURL(photoInput.files[0]);
     } else {
-      createReviewCard(null);
+      addNewReview(null);
     }
   });
+
+  // Функції адміністрування
+  let isAdminVisible = false;
+  function toggleAdminMode(keepState = false) {
+    if (!keepState) {
+      isAdminVisible = !isAdminVisible;
+    }
+    adminSection.style.display = isAdminVisible ? 'block' : 'none';
+    
+    document.querySelectorAll('.admin-actions').forEach(el => {
+      el.style.display = isAdminVisible ? 'flex' : 'none';
+    });
+  }
+
+  function approveReview(index) {
+    reviews[index].status = 'published';
+    saveAndRender();
+  }
+
+  function deleteReview(index) {
+    if (confirm('Ви впевнені, що хочете видалити цей відгук?')) {
+      reviews.splice(index, 1);
+      saveAndRender();
+    }
+  }
+
+  let currentEditIndex = null;
+  function openEditModal(index) {
+    currentEditIndex = index;
+    const rev = reviews[index];
+    document.getElementById('editName').value = rev.name;
+    document.getElementById('editRating').value = rev.rating;
+    document.getElementById('editTexт').value = rev.text;
+    
+    const modal = new bootstrap.Modal(document.getElementById('editReviewModal'));
+    modal.show();
+  }
+
+  function saveEditedReview() {
+    if (currentEditIndex !== null) {
+      reviews[currentEditIndex].name = document.getElementById('editName').value;
+      reviews[currentEditIndex].rating = Number(document.getElementById('editRating').value);
+      reviews[currentEditIndex].text = document.getElementById('editTexт').value;
+      
+      saveAndRender();
+      bootstrap.Modal.getInstance(document.getElementById('editReviewModal')).hide();
+    }
+  }
+
+  // Початкове завантаження відгуків
+  renderReviews();
 </script>
 
 </body>
 </html>
+```[cite: 7]
