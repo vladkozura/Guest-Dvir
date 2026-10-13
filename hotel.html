@@ -57,24 +57,39 @@
 
     .card-custom img {
       width: 100%;
-      height: 260px; /* Трохи зменшено висоту для гармонійного вигляду в 4 колонки */
+      height: 330px;
       object-fit: cover;
       object-position: top center;
       filter: brightness(0.95);
     }
 
     .card-custom .card-body {
-      padding: 20px;
+      padding: 25px;
     }
 
     .card-custom h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      margin-bottom: 10px;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
     }
 
-    .card-custom p {
-      font-size: 0.95rem;
+    /* Рамка для ціни */
+    .price-box {
+      border: 2px solid #A47363;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+      padding: 20px 30px;
+      display: inline-block;
+      max-width: 800px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .price-text {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0;
     }
 
     .btn-book {
@@ -140,43 +155,42 @@
 </section>
 
 <section class="section section-dark">
-  <div class="container-fluid py-4 px-lg-5"> <!-- Розширено контейнер для комфортного розміщення 4 карток в рядок -->
+  <div class="container py-4">
     <h1 class="text-center mb-4">Наші Номери</h1>
     <p class="text-center mb-5">
-      Пропонуємо комфортабельні номери з усіма зручностями. Для бронювання звертайтесь до адміністратора на барі або за номером телефону.
+      Пропонуємо комфортабельні номери "Стандарт" з усіма зручностями. Для бронювання звертайтесь до адміністратора на барі або за номером телефону.
     </p>
-
     <div class="row g-4">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="card-custom">
-          <img src="images3.jpg" alt="Номер 1" onerror="this.src='https://via.placeholder.com/400x240?text=Готель'">
+          <img src="images3.jpg" alt="Номер Стандарт" onerror="this.src='https://via.placeholder.com/400x240?text=Готель'">
           <div class="card-body">
             <h3>Номер "1"</h3>
-            <p>Затишний однокімнатний номер із двоспальним ліжком, санвузлом, кондиціонером, та видом на нашу територію та річку.</p>
+            <p>Затишний однокімнатний номер із двоспальним ліжком, санвузлом, кондиціонером, та видом на нашу чудову територію та річку.</p>
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="card-custom">
-          <img src="images3.jpg" alt="Номер 2" onerror="this.src='https://via.placeholder.com/400x240?text=Готель'">
+          <img src="images3.jpg" alt="Номер Напівлюкс" onerror="this.src='https://via.placeholder.com/400x240?text=Готель'">
           <div class="card-body">
             <h3>Номер "2"</h3>
             <p>Затишний однокімнатний номер із двоспальним ліжком, санвузлом, кондиціонером.</p>
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="card-custom">
-          <img src="images3.jpg" alt="Номер 3" onerror="this.src='https://via.placeholder.com/400x240?text=Готель'">
+          <img src="images3.jpg" alt="Сімейний Номер" onerror="this.src='https://via.placeholder.com/400x240?text=Готель'">
           <div class="card-body">
             <h3>Номер "3"</h3>
-            <p>Затишний однокімнатний номер із двоспальним ліжком, санвузлом, кондиціонером, та видом на нашу територію та річку.</p>
+            <p>Затишний однокімнатний номер із двоспальним ліжком, санвузлом, кондиціонером, та видом на нашу чудову територію та річку.</p>
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="card-custom">
-          <img src="images3.jpg" alt="Номер 4" onerror="this.src='https://via.placeholder.com/400x240?text=Готель'">
+          <img src="images3.jpg" alt="Сімейний Номер" onerror="this.src='https://via.placeholder.com/400x240?text=Готель'">
           <div class="card-body">
             <h3>Номер "4"</h3>
             <p>Затишний однокімнатний номер із двоспальним ліжком, санвузлом, кондиціонером.</p>
@@ -185,11 +199,18 @@
       </div>
     </div>
 
+    <!-- Блок з інформацією про вартість та кнопкою -->
     <div class="text-center mt-5">
-      <a href="contacts.html" class="btn btn-lg btn-book">
-        Забронювати номер
-      </a>
+      <div class="price-box">
+        <p class="price-text">Вартість проживання в наших номерах становить — 1200 грн за добу.</p>
+      </div>
+      <div>
+        <a href="contacts.html" class="btn btn-lg btn-book">
+          Забронювати номер
+        </a>
+      </div>
     </div>
+
   </div>
 </section>
 
