@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гостинний двір — Відгуки</title>
+    <!-- Підключення основного файлу стилів сайту -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Верхня навігаційна панель (ідентична іншим сторінкам сайту) -->
+    <header>
+        <div class="logo-container">
+            <img src="Logo 2.png" alt="Гостинний двір" class="logo">
+        </div>
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-btn">Головна</a>
+            <a href="hotel.html" class="nav-btn">Готель</a>
+            <a href="banya.html" class="nav-btn">Баня</a>
+            <a href="menu.html" class="nav-btn">Меню</a>
+            <a href="reviews.html" class="nav-btn active">Відгуки</a>
+            <a href="contacts.html" class="nav-btn">Контакти</a>
+        </nav>
+    </header>
+
+    <!-- Основний вміст сторінки відгуків -->
+    <main class="reviews-main">
+        <section class="reviews-hero">
+            <h1>Відгуки наших гостей</h1>
+            <p>Діліться своїми враженнями про відпочинок у «Гостинному дворі»!</p>
+        </section>
+
+        <!-- Секція форми для додавання відгуку -->
+        <section class="review-form-section">
+            <div class="form-card">
+                <h2>Залишити відгук</h2>
+                <form id="reviewForm">
+                    <div class="input-group">
+                        <label for="reviewerName">Ваше ім'я:</label>
+                        <input type="text" id="reviewerName" placeholder="Введіть ваше ім'я" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reviewRating">Оцінка:</label>
+                        <select id="reviewRating" required>
+                            <option value="5">⭐⭐⭐⭐⭐ (5/5 - Чудово)</option>
+                            <option value="4">⭐⭐⭐⭐ (4/5 - Дуже добре)</option>
+                            <option value="3">⭐⭐⭐ (3/5 - Нормально)</option>
+                            <option value="2">⭐⭐ (2/5 - Погано)</option>
+                            <option value="1">⭐ (1/5 - Жахливо)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reviewText">Ваш відгук:</label>
+                        <textarea id="reviewText" rows="4" placeholder="Розкажіть про свої враження..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Надіслати відгук</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Список відгуків -->
+        <section class="reviews-list-section">
+            <h2>Що говорять наші відвідувачі</h2>
+            <div id="reviewsContainer" class="reviews-grid">
+                <!-- Приклад статичного відгуку (або сюди можна підключити Firebase/Supabase) -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <strong>Олександр</strong>
+                        <span class="rating">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p>Чудове місце для відпочинку! Дуже затишний готель та неймовірна баня. Рекомендую всім!</p>
+                    <small class="review-date">12 жовтня 2026</small>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <p>&copy; 2026 Гостинний двір. Всі права захищені.</p>
+    </footer>
+
+    <!-- Додатковий скрипт для збереження або обробки відгуків (можна розширити за потреби) -->
+    <script>
+        const reviewForm = document.getElementById('reviewForm');
+        const reviewsContainer = document.getElementById('reviewsContainer');
+
+        reviewForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('reviewerName').value;
+            const rating = '⭐'.repeat(Number(document.getElementById('reviewRating').value));
+            const text = document.getElementById('reviewText').value;
+            const date = new Date().toLocaleDateString('uk-UA');
+
+            const newReview = document.createElement('div');
+            newReview.className = 'review-card';
+            newReview.innerHTML = `
+                <div class="review-header">
+                    <strong>${name}</strong>
+                    <span class="rating">${rating}</span>
+                </div>
+                <p>${text}</p>
+                <small class="review-date">${date}</small>
+            `;
+
+            reviewsContainer.prepend(newReview);
+            reviewForm.reset();
+            alert('Дякуємо! Ваш відгук успішно додано.');
+        });
+    </script>
+
+</body>
+</html>
